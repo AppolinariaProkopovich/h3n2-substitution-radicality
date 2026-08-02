@@ -12,7 +12,6 @@
 """
 
 import sys
-from pathlib import Path
 
 # ── Настройки ──────────────────────────────────────────────
 SITE =78
@@ -123,7 +122,7 @@ def main():
     print(f"\nСайт {site}:")
     print(f"  Рёбер с заменой: {len(subst_edges)}")
     print(f"  Рёбер без замены: {len(no_subst_nodes)}")
-    print(f"\nЗамены:")
+    print("\nЗамены:")
     for name, p_aa, n_aa in subst_edges:
         print(f"  {name}: {p_aa} -> {n_aa}")
 
@@ -133,7 +132,7 @@ def main():
         f.write("TREE_COLORS\n")
         f.write("SEPARATOR TAB\n")
         f.write(f"# Подсветка замен в аминокислотном сайте {site}\n")
-        f.write(f"# Красные ветви = замена, серые = без замены\n\n")
+        f.write("# Красные ветви = замена, серые = без замены\n\n")
         f.write("DATA\n")
 
         # Серые ветки (без замены)
@@ -168,7 +167,7 @@ def main():
     # ── Файл 3: COLLAPSE — список клад для схлопывания ──
     # Один обход postorder (снизу вверх): O(n)
     # Для каждого узла считаем: есть ли замена в поддереве и сколько листьев.
-    subst_node_names = set(name for name, _, _ in subst_edges)
+    subst_node_names = {name for name, _, _ in subst_edges}
 
     has_subst = {}   # node id -> bool
     leaf_count = {}  # node id -> int
@@ -214,8 +213,8 @@ def main():
     for name, n_leaves in sorted(final_collapse, key=lambda x: -x[1])[:10]:
         print(f"    {name} ({n_leaves} листьев)")
 
-    print(f"\n=== Инструкция ===")
-    print(f"1. Загрузите дерево в iTOL")
+    print("\n=== Инструкция ===")
+    print("1. Загрузите дерево в iTOL")
     print(f"2. Перетащите {colors_file} — покрасит ветви")
     print(f"3. Перетащите {labels_file} — добавит подписи замен")
     print(f"4. Перетащите {collapse_file} — схлопнет клады без замен")

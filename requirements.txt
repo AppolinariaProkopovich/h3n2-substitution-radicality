@@ -1,5 +1,7 @@
-biopython
-ete3
-jupyter
-numpy
-pandas
+aaindex>=1.1.2
+biopython>=1.84
+ete3>=3.1.3
+jupyterlab>=4.2
+numpy>=2.0
+pandas>=2.2
+pytest>=8.0

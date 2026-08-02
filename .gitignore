@@ -8,6 +8,8 @@
 __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
 .venv/
 venv/
 
@@ -20,12 +22,25 @@ Thumbs.db
 # Local data and generated analysis results
 data/
 output/
-results/
 *.csv
 *.tsv
+*.fa
+*.fasta
+*.fas
+*.newick
+*.nwk
+*.rds
 itol_site_*.txt
+
+# Keep directory documentation while excluding restricted local data/results.
+!data/
+data/*
+!data/README.md
+!results/
+results/tables/*
+!results/README.md
 
 # Keep the committed thesis and figure PDFs; ignore other generated PDFs.
 *.pdf
-!ВКР.pdf
-!tree_coverage_comparison.pdf
+!thesis/Prokopovich_2026_MSc_thesis_ru.pdf
+!results/figures/tree_coverage_comparison.pdf

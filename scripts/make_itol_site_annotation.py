@@ -10,7 +10,6 @@
 """
 
 import sys
-from pathlib import Path
 
 # ── Настройки ──────────────────────────────────────────────
 SITE = 78  # аминокислотный сайт (1-based), можно переопределить аргументом
@@ -109,7 +108,7 @@ def make_itol_colorstrip(seqs, site, output_path):
         f.write("STRIP_WIDTH\t30\n")
         f.write("BORDER_WIDTH\t1\n")
         f.write("BORDER_COLOR\t#ffffff\n")
-        f.write(f"MARGIN\t5\n\n")
+        f.write("MARGIN\t5\n\n")
 
         # Легенда
         tab = "\t"
