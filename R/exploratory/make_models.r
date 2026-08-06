@@ -31,6 +31,9 @@ valid_groups <- group_counts %>%
   pull(site)
 
 #создаем отфильтрованый dataset
+# ВНИМАНИЕ: здесь valid_groups - это номера сайтов, а фильтр применен к anc_aa;
+# рабочая версия фильтрации ("не менее 3 наблюдений на уровень случайного
+# фактора", как в дипломе) - в R/fit_radicality_models.R
 datasets_rad_site <- datasets_rad %>%
   filter(anc_aa %in% valid_groups)
 glimpse(datasets_rad_site)

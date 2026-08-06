@@ -35,6 +35,12 @@ The extracted table contains:
 | `gr_rad_anc` | Grantham distance from `anc_aa` to `der_aa` |
 | `miyata_rad` | Miyata distance from `anc_aa` to `der_aa` |
 
-Subset labels for clustered substitutions, senescent sites, and laboratory-
-associated GWAS sites come from upstream analyses and are not inferred by the
-reusable scripts in this repository.
+`distance` is expressed in the branch-length units of the input tree: expected
+substitutions per site for the FastTree trees of D1 and D2, and years for the
+TreeTime tree of D3.
+
+Subset labels for clustered substitutions, senescent sites, and sites
+associated with laboratory passage come from upstream analyses and are not
+inferred by the reusable scripts in this repository. The passage-associated
+sites are the 9 concordant sites and 15 R-sites listed in the repository
+README.

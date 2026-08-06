@@ -9,6 +9,7 @@ cran_packages <- c(
   "grantham",
   "lme4",
   "lmerTest",
+  "MuMIn",
   "purrr",
   "readr",
   "stringr",

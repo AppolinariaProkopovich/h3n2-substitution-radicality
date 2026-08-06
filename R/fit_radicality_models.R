@@ -36,10 +36,27 @@ data <- data %>%
     anc_aa = factor(anc_aa)
   )
 
+model_r_squared <- function(model) {
+  # The thesis compares plain R^2 for linear models with the marginal and
+  # conditional R^2 of Nakagawa & Schielzeth (MuMIn) for mixed models. A linear
+  # model has no random part, so both of its values are the same R^2.
+  if (!inherits(model, "merMod")) {
+    r_squared <- summary(model)$r.squared
+    return(c(marginal = r_squared, conditional = r_squared))
+  }
+  if (!requireNamespace("MuMIn", quietly = TRUE)) {
+    warning("MuMIn is not installed; R^2 columns are reported as NA")
+    return(c(marginal = NA_real_, conditional = NA_real_))
+  }
+  values <- MuMIn::r.squaredGLMM(model)
+  c(marginal = unname(values[1, "R2m"]), conditional = unname(values[1, "R2c"]))
+}
+
 extract_fixed_effect <- function(model, response, specification, n_obs) {
   coefficients <- coef(summary(model))
   distance <- coefficients["distance", ]
   is_mixed <- inherits(model, "merMod")
+  r_squared <- model_r_squared(model)
 
   tibble(
     response = response,
@@ -62,6 +79,8 @@ extract_fixed_effect <- function(model, response, specification, n_obs) {
     } else {
       unname(distance[["Pr(>|z|)"]])
     },
+    r_squared_marginal = unname(r_squared[["marginal"]]),
+    r_squared_conditional = unname(r_squared[["conditional"]]),
     aic = AIC(model),
     bic = BIC(model),
     reml_criterion = if (is_mixed) lme4::REMLcrit(model) else NA_real_,

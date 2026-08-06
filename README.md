@@ -39,21 +39,55 @@ acid` groups.
 
 Three HA datasets were analysed in the thesis:
 
-| Dataset | Sequences | Tree / ancestral reconstruction | Substitution pairs | Sites |
-|---|---|---|---:|---:|
-| D1 | Clinical and laboratory-passaged | FastTree / MEGA | 2,492 | 125 |
-| D2 | Clinical only | FastTree / MEGA | 1,293 | 53 |
-| D3 | Clinical only, 2004 to September 2025 | TreeTime | 2,744 | 95 |
+| Dataset | Sequences | Tree / ancestral reconstruction | Branch-length units | Substitution pairs | Sites |
+|---|---|---|---|---:|---:|
+| D1 | Clinical and laboratory-passaged | FastTree (GTR+G) / MEGA | expected substitutions per site | 2,492 | 125 |
+| D2 | Clinical only | FastTree (GTR+G) / MEGA | expected substitutions per site | 1,293 | 53 |
+| D3 | Clinical only, 2004 to September 2025 | TreeTime, rooted on a 1968 isolate | years | 2,744 | 95 |
 
-D1 was also used for a phylogenetic GWAS of laboratory passage. It identified
-9 concordant sites, where changes coincide with transition to laboratory
-culture, and 15 R-sites, where more than 60% of changes occur on laboratory
-branches. Removing those 24 sites weakened but did not eliminate the artefact,
-suggesting that laboratory adaptation has a distributed effect.
+Because the distance axis is measured in different units, slopes are not
+comparable in absolute value across datasets. Only the sign and the
+significance of the distance effect are.
 
 The sequence data originate from GISAID and cannot be redistributed here.
 See [DATA_POLICY.md](DATA_POLICY.md) and [data/README.md](data/README.md) for
 the local input layout and table schema.
+
+## Site subsets
+
+Two subsets of sites are modelled separately. Both are defined upstream of this
+repository and enter it as labels:
+
+- **Clustered substitutions** — sites at which parallel substitutions
+  (independent changes to the same derived amino acid from the same ancestral
+  state) are closer to each other on the tree than divergent ones, following
+  Klink and Bazykin (2017). Distances are normalized separately for each site
+  and ancestral amino acid, the null distribution comes from shuffling
+  derived-state labels within each site and parental amino acid, and sites are
+  called at FDR < 0.1.
+- **Senescent sites** — sites at which the probability of replacing the current
+  amino acid grows with the time elapsed since it appeared, as defined by
+  Popova et al. (2019).
+
+## Laboratory-passage association analysis
+
+The D1 tree (2,711 leaves: 1,586 clinical and 1,125 laboratory) was also used to
+find HA sites whose substitutions are associated with laboratory culture. Each
+node was assigned a binary passage phenotype, phenotype changes were encoded as
+substitutions at a pseudo-site of an XPARR file, and the association between
+substitutions at a site and phenotype changes along branches was tested against
+a permutation null with EpiStat. Section 3.3 of the thesis describes this
+analysis.
+
+The analysis identified two disjoint classes of sites:
+
+- 9 concordant sites — 17, 176, 202, 210, 238, 241, 364, 380, 530 — where
+  substitutions coincide with the transition to laboratory culture;
+- 15 R-sites — 171, 183, 217, 236, 242, 245, 377, 391, 440, 441, 454, 455, 466,
+  468, 558 — where more than 60% of substitutions fall on laboratory branches.
+
+Removing those 24 sites weakened but did not eliminate the artefact, suggesting
+that laboratory adaptation has a distributed effect.
 
 ## Results
 
@@ -86,17 +120,17 @@ named Newick tree + ancestral nucleotide FASTA
 ```
 
 Tree construction, ancestral reconstruction, clustered-site calls, senescent-
-site calls, and phylogenetic GWAS were performed upstream. The exploratory
-notebooks and R sessions document those study-specific steps, but they still
-refer to private inputs and are retained as provenance rather than presented as
-a portable pipeline.
+site calls, and the EpiStat passage-association analysis were performed
+upstream. The exploratory notebooks and R sessions document those
+study-specific steps, but they still refer to private inputs and are retained
+as provenance rather than presented as a portable pipeline.
 
 ## Repository layout
 
 ```text
 R/fit_radicality_models.R        reusable fixed and mixed-model analysis
 R/exploratory/                   original interactive R research scripts
-notebooks/                       original extraction and GWAS notebooks
+notebooks/                       original extraction and passage-phenotype notebooks
 scripts/extract_substitution_pairs.py
                                  tree-to-table extraction
 scripts/add_radicality.py        Grantham and Miyata annotation
@@ -155,7 +189,12 @@ Rscript R/fit_radicality_models.R \
 ```
 
 Run the model script separately for the full, clustered, and senescent tables
-from each dataset. It writes one tidy row per response and model specification.
+from each dataset. It writes one tidy row per response and model specification,
+with the distance coefficient, its p-value, and the criteria the thesis uses to
+compare specifications: R² for the linear model, marginal and conditional R²
+after Nakagawa and Schielzeth for the mixed models, and the REML criterion.
+Levels of a random factor with fewer than three observations are dropped before
+fitting, as in the thesis.
 
 ## Tests
 
