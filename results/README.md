@@ -92,13 +92,15 @@ adaptation. [Thesis](../thesis/Prokopovich_2026_MSc_thesis_ru.pdf)
 | Figure | Content |
 |---|---|
 | [Substitution radicality](figures/substitution_radicality_concept.png) | Conceptual diagram of two successive substitutions at one position |
-| [Clinical dataset coefficients](figures/miyata_clinical_coefficients.png) | Miyata distance coefficients and p-values for all sites and clustered sites in D2 and D3 |
+| [Clustered-substitution regressions](figures/clustered_trends_Miyata.png) | Observations, fitted Miyata trends, and 95% confidence bands at clustered sites in D2 and D3 |
 | [Site heterogeneity in D3](figures/site_heterogeneity_D3_Miyata.png) | Pooled regression and mixed-model predictions with individual-site panels |
 | [Tree-coverage comparison](figures/tree_coverage_comparison.pdf) | Coverage of the phylogenetic trees used in the analysis |
 
-The conceptual diagram and coefficient plot are reused from the project's
-presentation assets. The site-heterogeneity figure comes from the project's
-regression-comparison analysis.
+The conceptual diagram is reused from the project's presentation assets. The
+clustered-substitution regressions come from the 2026 annual report. Their blue
+lines show the fixed-effect trend of a model with a site random intercept, and
+the bands show pointwise 95% confidence intervals for the mean response. The
+site-heterogeneity figure comes from the project's regression-comparison analysis.
 
 Write local model summaries to `results/tables/`. This directory is excluded
 from version control under the repository's data policy.

@@ -36,11 +36,13 @@ therefore depends on the model and the observations retained for fitting.
 Numerical results and the laboratory-passage analysis are described in the
 results guide. [Results and interpretation](results/README.md)
 
-![Miyata distance coefficients for all sites and sites with clustered substitutions in clinical datasets D2 and D3](results/figures/miyata_clinical_coefficients.png)
+![Miyata radicality versus evolutionary distance at sites with clustered substitutions in clinical datasets D2 and D3, with fitted regression lines and confidence bands](results/figures/clustered_trends_Miyata.png)
 
-*Distance coefficients from models with a site random intercept. The positive
-association at clustered sites occurs in both clinical datasets. Each panel
-uses its own scale and distance units.*
+*Sites with clustered substitutions in the two clinical datasets. Points show
+observed substitution pairs, blue lines show the fixed-effect trend from a
+model with a site random intercept, and shaded bands show pointwise 95%
+confidence intervals for the mean response. D2 is shown above and D3 below.
+Distance units follow each dataset.*
 
 ## Study design
 
