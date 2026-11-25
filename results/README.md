@@ -92,7 +92,7 @@ adaptation. [Thesis](../thesis/Prokopovich_2026_MSc_thesis_ru.pdf)
 | Figure | Content |
 |---|---|
 | [Substitution radicality](figures/substitution_radicality_concept.png) | Conceptual diagram of two successive substitutions at one position |
-| [Clustered-substitution regressions](figures/clustered_trends_Miyata.png) | Observations, fitted Miyata trends, and 95% confidence bands at clustered sites in D2 and D3 |
+| [Clustered-substitution regressions](figures/clustered_trends_Miyata_en.png) | Observations, fitted Miyata trends, and 95% confidence bands at clustered sites in D2 and D3 |
 | [Site heterogeneity in D3](figures/site_heterogeneity_D3_Miyata.png) | Pooled regression and mixed-model predictions with individual-site panels |
 | [Tree-coverage comparison](figures/tree_coverage_comparison.pdf) | Coverage of the phylogenetic trees used in the analysis |
 

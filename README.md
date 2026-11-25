@@ -36,7 +36,7 @@ therefore depends on the model and the observations retained for fitting.
 Numerical results and the laboratory-passage analysis are described in the
 results guide. [Results and interpretation](results/README.md)
 
-![Miyata radicality versus evolutionary distance at sites with clustered substitutions in clinical datasets D2 and D3, with fitted regression lines and confidence bands](results/figures/clustered_trends_Miyata.png)
+![Miyata radicality versus evolutionary distance at sites with clustered substitutions in clinical datasets D2 and D3, with fitted regression lines and confidence bands](results/figures/clustered_trends_Miyata_en.png)
 
 *Sites with clustered substitutions in the two clinical datasets. Points show
 observed substitution pairs, blue lines show the fixed-effect trend from a
