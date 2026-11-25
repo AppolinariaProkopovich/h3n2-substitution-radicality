@@ -1,14 +1,21 @@
 # Research notebooks
 
-These notebooks document the original development of the tree traversal,
-distance comparison, and laboratory-passage categorization steps. Their cell
-order, outputs, and study-specific paths are preserved as research provenance.
+These notebooks document the development of tree traversal, distance
+calculation, and laboratory-passage categorization. They retain their original
+cell order, outputs, and study-specific paths. Running them requires the
+corresponding local inputs and, in some cases, state from earlier cells.
 
-For new data, use `scripts/extract_substitution_pairs.py` rather than running
-the extraction notebooks cell by cell.
+| Notebook | Purpose |
+|---|---|
+| [get_data_from_tree_aa.ipynb](get_data_from_tree_aa.ipynb) | Extract successive amino-acid substitutions from the H3N2 tree and ancestral sequences |
+| [get_data_from_three.ipynb](get_data_from_three.ipynb) | Earlier extraction workflow, with H1N1 inputs in the retained version |
+| [dist_old.ipynb](dist_old.ipynb) | Inspect individual nodes, substitutions, and distance calculations |
+| [passage_phenotype_categories.ipynb](passage_phenotype_categories.ipynb) | Convert passage metadata into clinical/laboratory categories for the passage-association analysis |
 
-`passage_phenotype_categories.ipynb` turns GISAID passage strings into the
-binary clinical/laboratory phenotype used by the EpiStat association analysis.
-It only prepares that phenotype table; the association test itself was run
-outside this repository. It needs restricted strain metadata and cannot run
-without separately authorised inputs.
+The passage-category notebook prepares the phenotype table used upstream of
+EpiStat. It requires restricted strain metadata. The association test was run
+outside this repository.
+
+For extraction on new data, the command-line script provides input validation
+and a defined CSV output. [Extraction script](../scripts/extract_substitution_pairs.py) ·
+[Input format](../data/README.md) · [Run the analysis](../README.md#run-the-analysis)

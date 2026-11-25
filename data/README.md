@@ -21,7 +21,7 @@ internal node is named, plus an in-frame nucleotide FASTA containing one
 aligned sequence for every tree node. Text after whitespace or `/` in a FASTA
 header is removed when matching sequence identifiers to node names.
 
-The extracted table contains:
+The extraction step writes the following columns.
 
 | Column | Meaning |
 |---|---|
@@ -32,6 +32,11 @@ The extracted table contains:
 | `der_codon`, `der_aa` | State produced by the next substitution |
 | `distance` | Distance from the first substitution node to the midpoint of the next substitution branch |
 | `distance_grand` | Equivalent distance from the pre-first-substitution node |
+
+The radicality-annotation step adds two columns.
+
+| Column | Meaning |
+|---|---|
 | `gr_rad_anc` | Grantham distance from `anc_aa` to `der_aa` |
 | `miyata_rad` | Miyata distance from `anc_aa` to `der_aa` |
 
@@ -42,5 +47,18 @@ TreeTime tree of D3.
 Subset labels for clustered substitutions, senescent sites, and sites
 associated with laboratory passage come from upstream analyses and are not
 inferred by the reusable scripts in this repository. The passage-associated
-sites are the 9 concordant sites and 15 R-sites listed in the repository
-README.
+sites are the 9 concordant sites and 15 R-sites listed in the results guide.
+[Passage-associated sites](../results/README.md#laboratory-passage-association-analysis)
+
+## Starting from an existing table
+
+The R model script requires `distance`, `site`, `anc_aa`, `gr_rad_anc`, and
+`miyata_rad`. Distance and radicality columns must be numeric. Site and
+parental amino acid are treated as categorical variables.
+
+Prepare a separate table for each dataset and site subset before fitting.
+The script fits all three model specifications to each supplied table.
+[Model fitting](../README.md#4-fit-the-models)
+
+Raw inputs and processed tables are excluded from version control.
+[Data policy](../DATA_POLICY.md)
